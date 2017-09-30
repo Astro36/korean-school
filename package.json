@@ -1,0 +1,35 @@
+{
+  "name": "korean-school",
+  "version": "1.0.0",
+  "description": "Fetch Korean Schools Data from NEIS",
+  "main": "lib/index.js",
+  "scripts": {
+    "lint": "eslint lib",
+    "lint-fix": "eslint lib --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Astro36/KoreanSchool.git"
+  },
+  "keywords": [
+    "korean",
+    "schools",
+    "information",
+    "neis"
+  ],
+  "author": {
+    "name": "Astro36",
+    "email": "astr36@naver.com",
+    "url": "http://astro36.me"
+  },
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Astro36/KoreanSchool/issues"
+  },
+  "homepage": "https://github.com/Astro36/KoreanSchool#readme",
+  "devDependencies": {
+    "eslint": "^4.7.2",
+    "eslint-config-airbnb-base": "^12.0.1",
+    "eslint-plugin-import": "^2.7.0"
+  }
+}
