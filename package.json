@@ -4,8 +4,9 @@
   "description": "Fetch Korean Schools Data from NEIS",
   "main": "lib/index.js",
   "scripts": {
-    "lint": "eslint lib",
-    "lint-fix": "eslint lib --fix"
+    "lint": "eslint lib test",
+    "lint-fix": "eslint lib test --fix",
+    "test": "mocha --reporter nyan"
   },
   "repository": {
     "type": "git",
@@ -27,9 +28,14 @@
     "url": "https://github.com/Astro36/KoreanSchool/issues"
   },
   "homepage": "https://github.com/Astro36/KoreanSchool#readme",
+  "dependencies": {
+    "realm": "^2.0.0-rc16"
+  },
   "devDependencies": {
+    "chai": "^4.1.2",
     "eslint": "^4.7.2",
     "eslint-config-airbnb-base": "^12.0.1",
-    "eslint-plugin-import": "^2.7.0"
+    "eslint-plugin-import": "^2.7.0",
+    "mocha": "^3.5.3"
   }
 }
