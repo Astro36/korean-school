@@ -29,7 +29,9 @@
   },
   "homepage": "https://github.com/Astro36/KoreanSchool#readme",
   "dependencies": {
-    "realm": "^2.0.0-rc16"
+    "cheerio": "^1.0.0-rc.2",
+    "realm": "^2.0.0-rc16",
+    "request": "^2.83.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",
