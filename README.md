@@ -18,7 +18,7 @@ See [CHANGELOG](./CHANGELOG.md)
 - Install with npm:
 
 ```bash
-npm install korean-school -g
+npm install korean-school --save
 ```
 
 - Clone the repo:
@@ -58,8 +58,8 @@ school.find('고양시', '백석고');
 #### school.neis.getMeal(school, date, callback)
 
 - `school` <[Object]>
-  - `code` <[String]>: (required)
-  - `officeDomain` <[String]>: (required)
+  - `code` <[String]> (required)
+  - `officeDomain` <[String]> (required)
 - `date` <[Date]>
 - `callback` <[Function]>
 - returns: <[Object]<[String]|[Null]>|[Null]>
@@ -85,8 +85,8 @@ school.neis.getMeal(school.find('고양시', '백석고'), new Date(), (meal) =>
 #### school.neis.getMeals(school, date, callback)
 
 - `school` <[Object]>
-  - `code` <[String]>: (required)
-  - `officeDomain` <[String]>: (required)
+  - `code` <[String]> (required)
+  - `officeDomain` <[String]> (required)
 - `date` <[Date]>
 - `callback` <[Function]>
 - returns: <[Array]<[Object]<[String]|[Null]>>|[Null]>
