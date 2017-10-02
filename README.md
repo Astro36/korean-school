@@ -2,16 +2,23 @@
 
 > Fetch Korean Schools Data from NEIS
 
+[![npm](https://img.shields.io/npm/v/korean-school.svg?style=flat-square)](https://www.npmjs.com/package/korean-school) [![npm](https://img.shields.io/npm/dt/korean-school.svg?style=flat-square)](https://www.npmjs.com/package/korean-school)
+
 ## ChangeLog
 
 See [CHANGELOG](./CHANGELOG.md)
+
+## Feature
+
+- Find the school data by its location and name
+- Fetch the school meal from NEIS
 
 ## Installation
 
 - Install with npm:
 
 ```bash
-npm install KoreanSchool -g
+npm install korean-school -g
 ```
 
 - Clone the repo:
@@ -28,7 +35,16 @@ git clone https://github.com/Astro36/KoreanSchool.git
 
 - `adress` <[String]> A part of school's address
 - `schoolName` <[String]> A part of school's name
-- returns: <[RealmObject]|[Null]>
+- returns: <[Object]|[Null]>
+  - `code` <[String]>
+  - `office` <[String]>
+  - `officeDomain` <[String]>
+  - `nameShort` <[String]>
+  - `name` <[String]>
+  - `zipCode` <[String]>
+  - `address` <[String]>
+  - `phone` <[String]>
+  - `details` <[String]>
 
 This method gets the school data from DB with school's address and name.
 
@@ -41,7 +57,9 @@ school.find('고양시', '백석고');
 
 #### school.neis.getMeal(school, date, callback)
 
-- `school` <[RealmObject]>
+- `school` <[Object]>
+  - `code` <[String]>: (required)
+  - `officeDomain` <[String]>: (required)
 - `date` <[Date]>
 - `callback` <[Function]>
 - returns: <[Object]<[String]|[Null]>|[Null]>
@@ -66,7 +84,9 @@ school.neis.getMeal(school.find('고양시', '백석고'), new Date(), (meal) =>
 
 #### school.neis.getMeals(school, date, callback)
 
-- `school` <[RealmObject]>
+- `school` <[Object]>
+  - `code` <[String]>: (required)
+  - `officeDomain` <[String]>: (required)
 - `date` <[Date]>
 - `callback` <[Function]>
 - returns: <[Array]<[Object]<[String]|[Null]>>|[Null]>
@@ -87,6 +107,19 @@ school.neis.getMeals(school.find('고양시', '백석고'), new Date(), (meals) 
       console.log(meal.lunch);
       console.log(meal.dinner);
     }
+  }
+});
+```
+
+**The array starts with 0!**
+
+If you get 15th day's meals, you need to get the 14th value.
+
+```javascript
+const school = require('korean-school');
+school.neis.getMeals(school.find('고양시', '백석고'), new Date(), (meals) => {
+  if (meals !== null) {
+    meals[14]; // This is 15th day's meal.
   }
 });
 ```
@@ -120,5 +153,4 @@ KoreanSchool is licensed under the [GPL 3.0](./LICENSE).
 [Null]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Null_type "Null"
 [Number]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type "Number"
 [Object]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object "Object"
-[RealmObject]: https://realm.io/docs/javascript/latest/api/Realm.Object.html "RealmObject"
 [String]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type "String"
