@@ -1,6 +1,6 @@
 {
   "name": "korean-school",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Fetch Korean Schools Data from NEIS",
   "main": "lib/index.js",
   "scripts": {
@@ -30,12 +30,11 @@
   "homepage": "https://github.com/Astro36/KoreanSchool#readme",
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
-    "realm": "^2.0.0-rc16",
     "request": "^2.83.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",
-    "eslint": "^4.7.2",
+    "eslint": "^4.8.0",
     "eslint-config-airbnb-base": "^12.0.1",
     "eslint-plugin-import": "^2.7.0",
     "mocha": "^3.5.3"
