@@ -8,7 +8,7 @@
 
 See [CHANGELOG](./CHANGELOG.md)
 
-## Feature
+## Features
 
 - Find the school data by its location and name
 - Fetch the school meal from NEIS
