@@ -3,11 +3,11 @@
 ## Table of Contents
 
 - `school`
-  - [.find(address, schoolName)](#schoolfindaddressschoolname)
-  - [.findAll(address, schoolName)](#schoolfindalladdressschoolname)
+  - [.find(address, schoolName)](#schoolfindaddress-schoolname)
+  - [.findAll(address, schoolName)](#schoolfindalladdress-schoolname)
   - `.neis`
-    - [.getMeal(school, date, callback)](#schoolneisgetmealschooldatecallback)
-    - [.getMeals(school, date, callback)](#schoolneisgetmealsschooldatecallback)
+    - [.getMeal(school, date, callback)](#schoolneisgetmealschool-date-callback)
+    - [.getMeals(school, date, callback)](#schoolneisgetmealsschool-date-callback)
 
 ## KoreanSchool
 
@@ -56,7 +56,7 @@ An example of getting the all school data:
 
 ```javascript
 const school = require('korean-school');
-school.findAll('고양시', '백석');
+school.findAll('고양시', '고등학교');
 ```
 
 ### school.neis.getMeal(school, date, callback)
