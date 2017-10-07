@@ -67,7 +67,7 @@ An example of fetching the daily school meal:
 
 ```javascript
 const school = require('korean-school');
-school.neis.getMeal(school.find('고양시', '백석고'), new Date(), (meal) => {
+school.neis.getMeal(school.find('경기도', '백석고'), new Date(), (meal) => {
   if (meal !== null) {
     console.log(meal.breakfast);
     console.log(meal.lunch);
@@ -94,7 +94,7 @@ An example of fetching the monthly school meals:
 
 ```javascript
 const school = require('korean-school');
-school.neis.getMeals(school.find('고양시', '백석고'), new Date(), (meals) => {
+school.neis.getMeals(school.find('경기도', '백석고'), new Date(), (meals) => {
   if (meals !== null) {
     for (const meal of meals) {
       console.log(meal.breakfast);
@@ -111,7 +111,7 @@ If you get 15th day's meals, you need to get the 14th value.
 
 ```javascript
 const school = require('korean-school');
-school.neis.getMeals(school.find('고양시', '백석고'), new Date(), (meals) => {
+school.neis.getMeals(school.find('경기도', '백석고'), new Date(), (meals) => {
   if (meals !== null) {
     meals[14]; // This is 15th day's meal.
   }
