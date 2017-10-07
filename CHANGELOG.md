@@ -1,5 +1,21 @@
 # Changelog
 
+## v0.3.0
+
+Released Oct 7, 2017
+
+### Added
+
+- Add elementary schools and middle schools data on DB.
+
+### Changed
+
+- Change the parameter of [school.find(office, schoolName)](./API.md#schoolfindoffice-schoolname) method and [school.findAll(office, schoolName)](./API.md#schoolfindalloffice-schoolname) method; `address` -> `office`
+
+### Removed
+
+- Remove the unused school data on DB; `nameShort`, `zipCode`, `address`, `phone`, and `details`
+
 ## v0.2.0
 
 Released Oct 4, 2017
