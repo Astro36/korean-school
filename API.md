@@ -3,60 +3,50 @@
 ## Table of Contents
 
 - `school`
-  - [.find(address, schoolName)](#schoolfindaddress-schoolname)
-  - [.findAll(address, schoolName)](#schoolfindalladdress-schoolname)
+  - [.find(office, schoolName)](#schoolfindoffice-schoolname)
+  - [.findAll(office, schoolName)](#schoolfindalloffice-schoolname)
   - `.neis`
     - [.getMeal(school, date, callback)](#schoolneisgetmealschool-date-callback)
     - [.getMeals(school, date, callback)](#schoolneisgetmealsschool-date-callback)
 
 ## KoreanSchool
 
-### school.find(address, schoolName)
+### school.find(office, schoolName)
 
-- `adress` <[String]> A part of school's address
+- `office` <[String]> A part of school's office of eduction
 - `schoolName` <[String]> A part of school's name
 - returns: <[Object]|[Null]>
   - `code` <[String]>
   - `office` <[String]>
   - `officeDomain` <[String]>
-  - `nameShort` <[String]>
   - `name` <[String]>
-  - `zipCode` <[String]>
-  - `address` <[String]>
-  - `phone` <[String]>
-  - `details` <[String]>
 
-This method gets the school data which appears first from DB with school's address and name.
+This method gets the school data which appears first from DB with school's office and name.
 
 An example of getting the school data:
 
 ```javascript
 const school = require('korean-school');
-school.find('고양시', '백석고');
+school.find('경기도', '백석고');
 ```
 
-### school.findAll(address, schoolName)
+### school.findAll(office, schoolName)
 
-- `adress` <[String]> A part of school's address
+- `office` <[String]> A part of school's office of eduction
 - `schoolName` <[String]> A part of school's name
 - returns: <[Object]|[Null]>
   - `code` <[String]>
   - `office` <[String]>
   - `officeDomain` <[String]>
-  - `nameShort` <[String]>
   - `name` <[String]>
-  - `zipCode` <[String]>
-  - `address` <[String]>
-  - `phone` <[String]>
-  - `details` <[String]>
 
-This method gets the all school data from DB with school's address and name.
+This method gets the all school data from DB with school's office and name.
 
 An example of getting the all school data:
 
 ```javascript
 const school = require('korean-school');
-school.findAll('고양시', '고등학교');
+school.findAll('경기도', '고등학교');
 ```
 
 ### school.neis.getMeal(school, date, callback)

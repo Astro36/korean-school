@@ -2,26 +2,26 @@ const { expect } = require('chai');
 const school = require('../lib');
 
 describe('school', () => {
-  describe('.find(address, schoolName)', () => {
+  describe('.find(office, schoolName)', () => {
     context('when not present', () => {
       it('should return null', () => expect(school.find('해리포터', '호그와트')).to.be.null);
     });
     context('when present', () => {
-      it('should return the school where the element first appears in the db', () => expect(school.find('고양시', '백석고').name).to.have.string('백석고'));
+      it('should return the school where the element first appears in the db', () => expect(school.find('경기도', '백석고').name).to.have.string('백석고'));
     });
   });
 
-  describe('.findAll(address, schoolName)', () => {
+  describe('.findAll(office, schoolName)', () => {
     context('when not present', () => {
       it('should return null', () => expect(school.find('해리포터', '호그와트')).to.be.null);
     });
     context('when present', () => {
-      it('should return the schools as an array in the db', () => expect(school.findAll('고양시', '고등학교')).to.be.a('array'));
+      it('should return the schools as an array in the db', () => expect(school.findAll('경기도', '고등학교')).to.be.a('array'));
     });
-  });
+  });console.log(school.findAll('경기도', '백석고'))
 
   describe('.neis', () => {
-    const schoolData = school.find('고양시', '백석고');
+    const schoolData = school.find('경기도', '백석고');
     const now = new Date();
 
     describe('.getMeals(school, date, callback)', () => {
