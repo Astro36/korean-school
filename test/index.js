@@ -7,7 +7,7 @@ describe('school', () => {
       it('should return null', () => expect(school.find('해리포터', '호그와트')).to.be.null);
     });
     context('when present', () => {
-      it('should return the school where the element first appears in the DB', () => expect(school.find('경기도', '백석고').name).to.have.string('백석고'));
+      it('should return the school which is best match in the DB', () => expect(school.find('경기도', '백석고').name).to.have.string('백석고'));
     });
   });
 

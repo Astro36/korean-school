@@ -13,8 +13,8 @@
 
 ### school.find(office, schoolName)
 
-- `office` <[String]> A part of school's office of eduction
-- `schoolName` <[String]> A part of school's name
+- `office` <[String]|[RegExp]> A part of school's office of eduction
+- `schoolName` <[String]|[RegExp]> A part of school's name
 - returns: <[Object]|[Null]>
   - `code` <[String]>
   - `office` <[String]>
@@ -32,8 +32,8 @@ school.find('경기도', '백석고');
 
 ### school.findAll(office, schoolName)
 
-- `office` <[String]> A part of school's office of eduction
-- `schoolName` <[String]> A part of school's name
+- `office` <[String]|[RegExp]> A part of school's office of eduction
+- `schoolName` <[String]|[RegExp]> A part of school's name
 - returns: <[Object]|[Null]>
   - `code` <[String]>
   - `office` <[String]>
@@ -125,4 +125,5 @@ school.neis.getMeals(school.find('경기도', '백석고'), new Date(), (meals) 
 [Null]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Null_type "Null"
 [Number]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type "Number"
 [Object]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object "Object"
+[RegExp]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp "RegExp"
 [String]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type "String"
