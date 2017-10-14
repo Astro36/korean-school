@@ -3,25 +3,26 @@
 ## Table of Contents
 
 - `school`
-  - [.find(office, schoolName)](#schoolfindoffice-schoolname)
-  - [.findAll(office, schoolName)](#schoolfindalloffice-schoolname)
+  - [.find(office, schoolName, useAlias = true)](#schoolfindoffice-schoolname-useAlias-true)
+  - [.findAll(office, schoolName, useAlias = true)](#schoolfindalloffice-schoolname-useAlias-true)
   - `.neis`
     - [.getMeal(school, date, callback)](#schoolneisgetmealschool-date-callback)
     - [.getMeals(school, date, callback)](#schoolneisgetmealsschool-date-callback)
 
 ## KoreanSchool
 
-### school.find(office, schoolName)
+### school.find(office, schoolName, useAlias = true)
 
 - `office` <[String]|[RegExp]> A part of school's office of eduction
 - `schoolName` <[String]|[RegExp]> A part of school's name
+- `[useAlias=true]` <[Boolean]> Use office and school name alias
 - returns: <[Object]|[Null]>
   - `code` <[String]>
   - `office` <[String]>
   - `officeDomain` <[String]>
   - `name` <[String]>
 
-This method gets the school data which appears first from DB with school's office and name.
+This method gets the school data which is best match in the DB with school's office and name.
 
 An example of getting the school data:
 
@@ -30,10 +31,11 @@ const school = require('korean-school');
 school.find('경기도', '백석고');
 ```
 
-### school.findAll(office, schoolName)
+### school.findAll(office, schoolName, useAlias = true)
 
 - `office` <[String]|[RegExp]> A part of school's office of eduction
 - `schoolName` <[String]|[RegExp]> A part of school's name
+- `[useAlias=true]` <[Boolean]> Use office and school name alias
 - returns: <[Object]|[Null]>
   - `code` <[String]>
   - `office` <[String]>

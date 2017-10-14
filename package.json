@@ -1,6 +1,6 @@
 {
   "name": "korean-school",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Fetch Korean Schools Data from NEIS",
   "main": "lib/index.js",
   "scripts": {

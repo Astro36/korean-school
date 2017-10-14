@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.3.1
+
+Released Oct 14, 2017
+
+## Changed
+
+- Improve school data search algorithm.
+
 ## v0.3.0
 
 Released Oct 7, 2017
