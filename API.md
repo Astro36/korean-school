@@ -4,7 +4,7 @@
 
 - `school`
   - [.find(office, schoolName, useAlias = true)](#schoolfindoffice-schoolname-usealias--true)
-  - [.findAll(office, schoolName, useAlias = true)](schoolfindalloffice-schoolname-usealias--true)
+  - [.findAll(office, schoolName, useAlias = true)](#schoolfindalloffice-schoolname-usealias--true)
   - `.neis`
     - [.getMeal(school, date, callback)](#schoolneisgetmealschool-date-callback)
     - [.getMeals(school, date, callback)](#schoolneisgetmealsschool-date-callback)
