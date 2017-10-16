@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.4.0
+
+Released Oct 16, 2017
+
+### Added
+
+- Add [.getSummary(school, callback)](#schoolschoolinfogetsummaryschool-callback) method.
+
 ## v0.3.1
 
 Released Oct 14, 2017

@@ -8,6 +8,8 @@
   - `.neis`
     - [.getMeal(school, date, callback)](#schoolneisgetmealschool-date-callback)
     - [.getMeals(school, date, callback)](#schoolneisgetmealsschool-date-callback)
+  - `.schoolinfo`
+    - [.getSummary(school, callback)](#schoolschoolinfogetsummaryschool-callback)
 
 ## KoreanSchool
 
@@ -116,6 +118,38 @@ const school = require('korean-school');
 school.neis.getMeals(school.find('경기도', '백석고'), new Date(), (meals) => {
   if (meals !== null) {
     meals[14]; // This is 15th day's meal.
+  }
+});
+```
+
+### school.schoolinfo.getSummary(school, callback)
+
+- `school` <[Object]>
+  - `code` <[String]> (required)
+  - `officeDomain` <[String]> (required)
+- `callback` <[Function]>
+- returns: <[Object]<[String]|[Null]>>
+  - `address` <[String]|[Null]>
+  - `area` <[String]|[Null]>
+  - `class` <[String]|[Null]>
+  - `office` <[String]|[Null]>
+  - `phone` <[String]|[Null]>
+  - `fax` <[String]|[Null]>
+  - `establishmentDate` <[String]|[Null]>
+  - `establishmentType` <[String]|[Null]>
+  - `schoolAnniversary` <[String]|[Null]>
+  - `schoolType` <[String]|[Null]>
+  - `site` <[String]|[Null]>
+
+This method fetches the school information from [School Info](http://www.schoolinfo.go.kr/).
+
+An example of fetching the school information:
+
+```javascript
+const school = require('korean-school');
+school.schoolinfo.getSummary(school.find('경기도', '백석고'), (data) => {
+  if (data !== null) {
+    console.log(JSON.stringify(data));
   }
 });
 ```
