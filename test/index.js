@@ -46,4 +46,17 @@ describe('school', () => {
       });
     });
   });
+
+  describe('.schoolinfo', () => {
+    describe('.getSummary(school, callback)', () => {
+      context('when present', () => {
+        it('should return the school info as an object', (done) => {
+          school.schoolinfo.getSummary(school.find('경기도', '백석고'), (content) => {
+            expect(content).to.be.a('object');
+            done();
+          });
+        });
+      });
+    });
+  });
 });
