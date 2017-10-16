@@ -6,7 +6,7 @@ Released Oct 16, 2017
 
 ### Added
 
-- Add [.getSummary(school, callback)](#schoolschoolinfogetsummaryschool-callback) method.
+- Add [.getSummary(school, callback)](./API.md#schoolschoolinfogetsummaryschool-callback) method.
 
 ## v0.3.1
 
