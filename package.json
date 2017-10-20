@@ -1,7 +1,7 @@
 {
   "name": "korean-school",
   "version": "0.4.0",
-  "description": "Fetch Korean Schools Data from NEIS",
+  "description": "Fetch Korean Schools Data Online",
   "main": "lib/index.js",
   "scripts": {
     "lint": "eslint lib test",
@@ -16,7 +16,9 @@
     "korean",
     "schools",
     "information",
-    "neis"
+    "neis",
+    "schoolinfo",
+    "comcigan"
   ],
   "author": {
     "name": "Astro36",

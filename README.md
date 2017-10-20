@@ -1,6 +1,6 @@
 # KoreanSchool
 
-> Fetch Korean Schools Data from NEIS and School Info
+> Fetch Korean Schools Data Online
 
 [![npm](https://img.shields.io/npm/v/korean-school.svg?style=flat-square)](https://www.npmjs.com/package/korean-school) [![npm](https://img.shields.io/npm/dt/korean-school.svg?style=flat-square)](https://www.npmjs.com/package/korean-school)
 
@@ -13,6 +13,7 @@ See [CHANGELOG](./CHANGELOG.md)
 - Find the school data by its location and name
 - Fetch the school meal from NEIS
 - Fetch the school information from School Info
+- Fetch the school schedule from Comcigan
 
 ## Installation
 
