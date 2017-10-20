@@ -60,7 +60,7 @@ describe('school', () => {
     context('when present', () => {
       it('should return the school daily schedule as an array', (done) => {
         school.getSchedule(schoolData, 1, 1, now, (content) => {
-          expect(content).to.be.a('array');console.log(content)
+          expect(content).to.be.a('array');
           done();
         });
       });
