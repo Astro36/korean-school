@@ -26,7 +26,7 @@ describe('school', () => {
   describe('.getInformation(school, callback)', () => {
     context('when present', () => {
       it('should return the school info as an object', (done) => {
-        school.getInformation(school.find('경기도', '백석고'), (content) => {
+        school.getInformation(schoolData, (content) => {
           expect(content).to.be.a('object');
           done();
         });
@@ -60,7 +60,7 @@ describe('school', () => {
     context('when present', () => {
       it('should return the school daily schedule as an array', (done) => {
         school.getSchedule(schoolData, 1, 1, now, (content) => {
-          expect(content).to.be.a('array');
+          expect(content).to.be.a('array');console.log(content)
           done();
         });
       });
