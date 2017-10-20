@@ -69,7 +69,7 @@ describe('school', () => {
 
   describe('.getSchedules(school, grade, room, callback)', () => {
     context('when present', () => {
-      it('should return the school daily schedule as an array', (done) => {
+      it('should return the school weekly schedules as an array', (done) => {
         school.getSchedules(schoolData, 1, 1, (content) => {
           expect(content).to.be.a('array');
           done();
