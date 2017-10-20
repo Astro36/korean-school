@@ -188,7 +188,7 @@ school.getSchedule(school.find('경기도', '백석고'), 1, 1, new Date(), (sch
 - `grade` <[Number]>
 - `room` <[Number]>
 - `callback` <[Function]>
-- returns: <[Array]<[Object]<[String]|[Null]>|[Null]>>
+- returns: <[Array]<[Array]<[Object]<[String]|[Null]>|[Null]>|[Null]>>
   - `subject` <[String]|[Null]>
   - `teacher` <[String]|[Null]>
 
