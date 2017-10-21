@@ -41,7 +41,7 @@ Fetch the daily school meal:
 
 ```javascript
 const school = require('korean-school');
-school.neis.getMeal(school.find('경기도', '백석고'), new Date(), (meal) => {
+school.getMeal(school.find('경기도', '백석고'), new Date(), (meal) => {
   if (meal !== null) {
     console.log(meal.breakfast);
     console.log(meal.lunch);
