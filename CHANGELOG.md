@@ -6,7 +6,7 @@ Released Nov 16, 2017
 
 ### Added
 
-- Add {isChanged} property on schedule object.
+- Add `isChanged` property on schedule object.
 
 ## v0.5.0
 
