@@ -2,18 +2,17 @@
 
 ## Table of Contents
 
-- `school`
-  - [.find(office, schoolName, useAlias = true)](#schoolfindoffice-schoolname-usealias--true)
-  - [.findAll(office, schoolName, useAlias = true)](#schoolfindalloffice-schoolname-usealias--true)
-  - [.getInformation(school, callback)](#schoolgetinformationschool-callback)
-  - [.getMeal(school, date, callback)](#schoolgetmealschool-date-callback)
-  - [.getMeals(school, date, callback)](#schoolgetmealsschool-date-callback)
-  - [.getSchedule(school, grade, room, date, callback)](#schoolgetscheduleschool-grade-room-date-callback)
-  - [.getSchedules(school, grade, room, callback)](#schoolgetschedulesschool-grade-room-callback)
+- [.find(office, schoolName, useAlias = true)](#findoffice-schoolname-usealias--true)
+- [.findAll(office, schoolName, useAlias = true)](#findalloffice-schoolname-usealias--true)
+- [.getInformation(school, callback)](#getinformationschool-callback)
+- [.getMeal(school, date, callback)](#getmealschool-date-callback)
+- [.getMeals(school, date, callback)](#getmealsschool-date-callback)
+- [.getSchedule(school, grade, room, date, callback)](#getscheduleschool-grade-room-date-callback)
+- [.getSchedules(school, grade, room, callback)](#getschedulesschool-grade-room-callback)
 
 ## KoreanSchool
 
-### school.find(office, schoolName, useAlias = true)
+### .find(office, schoolName, useAlias = true)
 
 - `office` <[String]|[RegExp]> A part of school's office of eduction
 - `schoolName` <[String]|[RegExp]> A part of school's name
@@ -33,7 +32,7 @@ const school = require('korean-school');
 school.find('경기도', '백석고');
 ```
 
-### school.findAll(office, schoolName, useAlias = true)
+### .findAll(office, schoolName, useAlias = true)
 
 - `office` <[String]|[RegExp]> A part of school's office of eduction
 - `schoolName` <[String]|[RegExp]> A part of school's name
@@ -53,7 +52,7 @@ const school = require('korean-school');
 school.findAll('경기도', '고등학교');
 ```
 
-### school.getInformation(school, callback)
+### .getInformation(school, callback)
 
 - `school` <[Object]>
   - `code` <[String]> (required)
@@ -85,7 +84,7 @@ school.getInformation(school.find('경기도', '백석고'), (data) => {
 });
 ```
 
-### school.getMeal(school, date, callback)
+### .getMeal(school, date, callback)
 
 - `school` <[Object]>
   - `code` <[String]> (required)
@@ -112,7 +111,7 @@ school.getMeal(school.find('경기도', '백석고'), new Date(), (meal) => {
 });
 ```
 
-### school.getMeals(school, date, callback)
+### .getMeals(school, date, callback)
 
 - `school` <[Object]>
   - `code` <[String]> (required)
@@ -154,7 +153,7 @@ school.getMeals(school.find('경기도', '백석고'), new Date(), (meals) => {
 });
 ```
 
-### school.getSchedule(school, grade, room, date, callback)
+### .getSchedule(school, grade, room, date, callback)
 
 - `school` <[Object]>
   - `code` <[String]> (required)
@@ -180,7 +179,7 @@ school.getSchedule(school.find('경기도', '백석고'), 1, 1, new Date(), (sch
 });
 ```
 
-### school.getSchedules(school, grade, room, callback)
+### .getSchedules(school, grade, room, callback)
 
 - `school` <[Object]>
   - `code` <[String]> (required)

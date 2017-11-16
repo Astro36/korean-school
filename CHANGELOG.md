@@ -1,5 +1,18 @@
 # Changelog
 
+## v0.5.0
+
+Released Oct 21, 2017
+
+### Added
+
+- Add Comcigan school id data on DB.
+- Add [school.getSchedule(school, grade, room, date, callback)](./API.md#schoolgetscheduleschool-grade-room-date-callback) and [school.getSchedules(school, grade, room, callback)](./API.md#schoolgetschedulesschool-grade-room-callback) methods.
+
+### Changed
+
+- **Lots of methods were changed.** See [API](./API.md) for more information.
+
 ## v0.4.0
 
 Released Oct 16, 2017

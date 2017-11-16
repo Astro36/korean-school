@@ -11,9 +11,9 @@ See [CHANGELOG](./CHANGELOG.md)
 ## Features
 
 - Find the school data by its location and name
-- Fetch the school meal from NEIS
-- Fetch the school information from School Info
-- Fetch the school schedule from Comcigan
+- Fetch the school information from [School Info](http://www.schoolinfo.go.kr)
+- Fetch the school meal from [NEIS](http://www.neis.go.kr)
+- Fetch the school schedule from [Comcigan](http://comcigan.co.kr)
 
 ## Installation
 
@@ -37,11 +37,11 @@ See [API](./API.md)
 
 ### Example
 
-Fetch the daily school meal:
+Fetch the school daily meal:
 
 ```javascript
 const school = require('korean-school');
-school.neis.getMeal(school.find('경기도', '백석고'), new Date(), (meal) => {
+school.getMeal(school.find('경기도', '백석고'), new Date(), (meal) => {
   if (meal !== null) {
     console.log(meal.breakfast);
     console.log(meal.lunch);
