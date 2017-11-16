@@ -165,6 +165,7 @@ school.getMeals(school.find('경기도', '백석고'), new Date(), (meals) => {
 - returns: <[Array]<[Object]<[String]|[Null]>|[Null]>>
   - `subject` <[String]|[Null]>
   - `teacher` <[String]|[Null]>
+  - `isChanged` <[Boolean]>
 
 This method fetches the school daily schedule.
 
@@ -190,6 +191,7 @@ school.getSchedule(school.find('경기도', '백석고'), 1, 1, new Date(), (sch
 - returns: <[Array]<[Array]<[Object]<[String]|[Null]>|[Null]>|[Null]>>
   - `subject` <[String]|[Null]>
   - `teacher` <[String]|[Null]>
+  - `isChanged` <[Boolean]>
 
 This method fetches the school weekly schedule.
 
