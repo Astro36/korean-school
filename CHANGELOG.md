@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.5.1
+
+Released Nov 16, 2017
+
+### Added
+
+- Add {isChanged} property on schedule object.
+
 ## v0.5.0
 
 Released Oct 21, 2017
