@@ -1,6 +1,6 @@
 {
   "name": "korean-school",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Fetch Korean Schools Data Online",
   "main": "lib/index.js",
   "scripts": {
