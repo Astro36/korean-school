@@ -43,7 +43,7 @@ school.find('경기도', '백석고');
   - `officeDomain` <[String]>
   - `name` <[String]>
 
-This method gets the all school data from DB with school's office and name.
+This method gets all matched school data from DB with school's office and name.
 
 An example of getting the all school data:
 

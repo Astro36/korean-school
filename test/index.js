@@ -77,4 +77,15 @@ describe('school', () => {
       });
     });
   });
+
+  describe('.getTeachers(school, callback)', () => {
+    context('when present', () => {
+      it('should return the school teachers as an array', (done) => {
+        school.getTeachers(schoolData, (content) => {
+          expect(content).to.be.a('array');
+          done();
+        });
+      });
+    });
+  });
 });
