@@ -33,7 +33,7 @@ git clone https://github.com/Astro36/KoreanSchool.git
 
 ### API Documentation
 
-See [API](./API.md)
+See [API](http://astro36.me/KoreanSchool/index.html)
 
 ### Example
 
@@ -49,8 +49,6 @@ school.getMeal(school.find('경기도', '백석고'), new Date(), (meal) => {
   }
 });
 ```
-
-You can see more examples on [API](./API.md) documentation.
 
 ## License
 

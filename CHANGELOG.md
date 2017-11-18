@@ -6,12 +6,12 @@ Released Nov 18, 2017
 
 ### Added
 
-- Add [getAll](), [.getComciganData(school)](./API.md), and [.getTeachers(school)]() method.
+- Add [getAll()](http://astro36.me/KoreanSchool/global.html#getAll), [.getComciganData(school)](http://astro36.me/KoreanSchool/global.html#getComciganData), and [.getTeachers(school)](http://astro36.me/KoreanSchool/global.html#getTeachers) method.
 - Add `subjectOriginal` property on schedule object.
 
 ### Changed
 
-
+- All callback functions were changed to async functions.
 
 ## v0.5.1
 
