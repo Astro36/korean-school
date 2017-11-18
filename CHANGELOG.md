@@ -1,5 +1,18 @@
 # Changelog
 
+## v0.6.0
+
+Released Nov 18, 2017
+
+### Added
+
+- Add [getAll](), [.getComciganData(school)](./API.md), and [.getTeachers(school)]() method.
+- Add `subjectOriginal` property on schedule object.
+
+### Changed
+
+
+
 ## v0.5.1
 
 Released Nov 16, 2017

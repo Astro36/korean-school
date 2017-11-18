@@ -1,5 +1,21 @@
-const { expect } = require('chai');
+const chai = require('chai');
+
+chai.use(require('chai-json-schema'));
+
+const { expect } = chai;
 const school = require('../lib');
+const {
+  createNullableSchema,
+  comciganDataSchema,
+  schoolDataArraySchema,
+  schoolDataSchema,
+  schoolInformationSchema,
+  schoolMealArraySchema,
+  schoolMealSchema,
+  schoolScheduleArraySchema,
+  schoolScheduleSchema,
+  schoolTeachersSchema,
+} = require('./schemas');
 
 describe('school', () => {
   const schoolData = school.find('경기도', '백석고');
@@ -10,7 +26,7 @@ describe('school', () => {
       it('should return null', () => expect(school.find('해리포터', '호그와트')).to.be.null);
     });
     context('when present', () => {
-      it('should return the school which is best match in the DB', () => expect(school.find('경기도', '백석고').name).to.have.string('백석고'));
+      it('should return the school data which is best match in the DB with school\'s office and name', () => expect(school.find('경기도', '백석고')).to.be.jsonSchema(schoolDataSchema));
     });
   });
 
@@ -19,73 +35,39 @@ describe('school', () => {
       it('should return null', () => expect(school.find('해리포터', '호그와트')).to.be.null);
     });
     context('when present', () => {
-      it('should return the schools as an array in the DB', () => expect(school.findAll('경기도', '고등학교')).to.be.a('array'));
+      it('should return all matched school data from DB with school\'s office and name.', () => expect(school.findAll('경기도', '고등학교')).to.be.jsonSchema(schoolDataArraySchema));
     });
   });
 
-  describe('.getInformation(school, callback)', () => {
-    context('when present', () => {
-      it('should return the school info as an object', (done) => {
-        school.getInformation(schoolData, (content) => {
-          expect(content).to.be.a('object');
-          done();
-        });
-      });
-    });
+  describe('.getAll()', () => {
+    it('should return all school data from DB', () => expect(school.getAll()).to.be.jsonSchema(schoolDataArraySchema));
   });
 
-  describe('.getMeal(school, date, callback)', () => {
-    context('when present', () => {
-      it('should return the school daily meal info as an object', (done) => {
-        school.getMeal(schoolData, now, (content) => {
-          expect(content).to.be.a('object');
-          done();
-        });
-      });
-    });
+  describe('.getComciganData(school)', () => {
+    it('should return the school data from Comcigan server', async () => expect(await school.getComciganData(schoolData)).to.be.jsonSchema(createNullableSchema(comciganDataSchema)));
   });
 
-  describe('.getMeals(school, date, callback)', () => {
-    context('when present', () => {
-      it('should return the school monthly meal info as an array', (done) => {
-        school.getMeals(schoolData, now, (content) => {
-          expect(content).to.be.a('array');
-          done();
-        });
-      });
-    });
+  describe('.getInformation(school)', () => {
+    it('should the school information from School Info', async () => expect(await school.getInformation(schoolData)).to.be.jsonSchema(createNullableSchema(schoolInformationSchema)));
   });
 
-  describe('.getSchedule(school, grade, room, date, callback)', () => {
-    context('when present', () => {
-      it('should return the school daily schedule as an array', (done) => {
-        school.getSchedule(schoolData, 1, 1, now, (content) => {
-          expect(content).to.be.a('array');
-          done();
-        });
-      });
-    });
+  describe('.getMeal(school, date)', () => {
+    it('should return the school daily meal', async () => expect(await school.getMeal(schoolData, now)).to.be.jsonSchema(createNullableSchema(schoolMealSchema)));
   });
 
-  describe('.getSchedules(school, grade, room, callback)', () => {
-    context('when present', () => {
-      it('should return the school weekly schedules as an array', (done) => {
-        school.getSchedules(schoolData, 1, 1, (content) => {
-          expect(content).to.be.a('array');
-          done();
-        });
-      });
-    });
+  describe('.getMeals(school, date)', () => {
+    it('should return the school monthly meals', async () => expect(await school.getMeals(schoolData, now)).to.be.jsonSchema(createNullableSchema(schoolMealArraySchema)));
   });
 
-  describe('.getTeachers(school, callback)', () => {
-    context('when present', () => {
-      it('should return the school teachers as an array', (done) => {
-        school.getTeachers(schoolData, (content) => {
-          expect(content).to.be.a('array');
-          done();
-        });
-      });
-    });
+  describe('.getSchedule(school, grade, room, date)', () => {
+    it('should return the school daily schedule', async () => expect(await school.getSchedule(schoolData, 1, 1, now)).to.be.jsonSchema(createNullableSchema(schoolScheduleSchema)));
+  });
+
+  describe('.getSchedules(school, grade, room)', () => {
+    it('should return the school weekly schedule', async () => expect(await school.getSchedules(schoolData, 1, 1)).to.be.jsonSchema(createNullableSchema(schoolScheduleArraySchema)));
+  });
+
+  describe('.getTeachers(school)', () => {
+    it('should return the school teachers', async () => expect(await school.getTeachers(schoolData)).to.be.jsonSchema(createNullableSchema(schoolTeachersSchema)));
   });
 });
