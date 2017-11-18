@@ -206,6 +206,27 @@ school.getSchedules(school.find('경기도', '백석고'), 1, 1, (schedules) => 
 });
 ```
 
+### .getTeachers(school, callback)
+
+- `school` <[Object]>
+  - `code` <[String]> (required)
+  - `officeDomain` <[String]> (required)
+- `callback` <[Function]>
+- returns: <[Array]<[String]>|[Null]>
+
+This method fetches the school teachers.
+
+An example of fetching the school teachers:
+
+```javascript
+const school = require('korean-school');
+school.getTeachers(school.find('경기도', '백석고'), (teachers) => {
+  if (teachers !== null) {
+    console.log(teachers);
+  }
+});
+```
+
 [Array]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array "Array"
 [Boolean]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type "Boolean"
 [Date]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date "Date"
