@@ -6,7 +6,7 @@ Released Nov 18, 2017
 
 ### Added
 
-- Add [getAll()](http://astro36.me/KoreanSchool/global.html#getAll), [.getComciganData(school)](http://astro36.me/KoreanSchool/global.html#getComciganData), and [.getTeachers(school)](http://astro36.me/KoreanSchool/global.html#getTeachers) method.
+- Add [.getAll()](http://astro36.me/KoreanSchool/global.html#getAll), [.getComciganData(school)](http://astro36.me/KoreanSchool/global.html#getComciganData), and [.getTeachers(school)](http://astro36.me/KoreanSchool/global.html#getTeachers) method.
 - Add `subjectOriginal` property on schedule object.
 
 ### Changed
