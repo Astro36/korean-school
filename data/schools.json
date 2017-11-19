@@ -31722,36 +31722,6 @@
         "name": "흑산초등학교흑산서분교장"
     },
     {
-        "code": "Q100003934",
-        "office": "전라남도",
-        "officeDomain": "jne.go",
-        "name": "가거도초등학교신안흑산중학교가거도분교장"
-    },
-    {
-        "code": "Q100001841",
-        "office": "전라남도",
-        "officeDomain": "jne.go",
-        "name": "넙도초등학교노화중학교넙도분교장"
-    },
-    {
-        "code": "Q100003482",
-        "office": "전라남도",
-        "officeDomain": "jne.go",
-        "name": "여안초등학교여남중학교안도분교장"
-    },
-    {
-        "code": "Q100003947",
-        "office": "전라남도",
-        "officeDomain": "jne.go",
-        "name": "연도초등학교여남중학교연도분교장(폐교)"
-    },
-    {
-        "code": "Q100001466",
-        "office": "전라남도",
-        "officeDomain": "jne.go",
-        "name": "화태초등학교여남중학교화태분교장"
-    },
-    {
         "code": "R100003444",
         "office": "경상북도",
         "officeDomain": "gbe.go",
@@ -43320,12 +43290,6 @@
         "name": "효성중학교"
     },
     {
-        "code": "D100002006",
-        "office": "대구광역시",
-        "officeDomain": "dge.go",
-        "name": "대구고등학교부설방송통신중학교"
-    },
-    {
         "code": "E100000757",
         "office": "인천광역시",
         "officeDomain": "ice.go",
@@ -45634,12 +45598,6 @@
         "office": "울산광역시",
         "officeDomain": "use.go",
         "name": "울산두남중학교"
-    },
-    {
-        "code": "H100000743",
-        "office": "울산광역시",
-        "officeDomain": "use.go",
-        "name": "학성고등학교부설방송통신중학교"
     },
     {
         "code": "I100000138",
@@ -53838,12 +53796,6 @@
         "name": "전라중학교부설방송통신중학교"
     },
     {
-        "code": "Q100003934",
-        "office": "전라남도",
-        "officeDomain": "jne.go",
-        "name": "가거도초등학교신안흑산중학교가거도분교장"
-    },
-    {
         "code": "Q100000340",
         "office": "전라남도",
         "officeDomain": "jne.go",
@@ -54178,12 +54130,6 @@
         "office": "전라남도",
         "officeDomain": "jne.go",
         "name": "남평중학교다도분교장"
-    },
-    {
-        "code": "Q100001841",
-        "office": "전라남도",
-        "officeDomain": "jne.go",
-        "name": "넙도초등학교노화중학교넙도분교장"
     },
     {
         "code": "Q100000685",
@@ -54870,12 +54816,6 @@
         "name": "여수중학교"
     },
     {
-        "code": "Q100003482",
-        "office": "전라남도",
-        "officeDomain": "jne.go",
-        "name": "여안초등학교여남중학교안도분교장"
-    },
-    {
         "code": "Q100001562",
         "office": "전라남도",
         "officeDomain": "jne.go",
@@ -54886,12 +54826,6 @@
         "office": "전라남도",
         "officeDomain": "jne.go",
         "name": "여천중학교"
-    },
-    {
-        "code": "Q100003947",
-        "office": "전라남도",
-        "officeDomain": "jne.go",
-        "name": "연도초등학교여남중학교연도분교장(폐교)"
     },
     {
         "code": "Q100001652",
@@ -55444,12 +55378,6 @@
         "office": "전라남도",
         "officeDomain": "jne.go",
         "name": "화원중학교"
-    },
-    {
-        "code": "Q100001466",
-        "office": "전라남도",
-        "officeDomain": "jne.go",
-        "name": "화태초등학교여남중학교화태분교장"
     },
     {
         "code": "Q100002157",
@@ -62694,12 +62622,6 @@
         "name": "대구고등학교부설방송통신고등학교"
     },
     {
-        "code": "D100002006",
-        "office": "대구광역시",
-        "officeDomain": "dge.go",
-        "name": "대구고등학교부설방송통신중학교"
-    },
-    {
         "code": "E100001696",
         "office": "인천광역시",
         "officeDomain": "ice.go",
@@ -64630,12 +64552,6 @@
         "office": "울산광역시",
         "officeDomain": "use.go",
         "name": "학성고등학교부설방송통신고등학교"
-    },
-    {
-        "code": "H100000743",
-        "office": "울산광역시",
-        "officeDomain": "use.go",
-        "name": "학성고등학교부설방송통신중학교"
     },
     {
         "code": "I100000145",
