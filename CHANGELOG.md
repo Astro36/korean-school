@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.6.1
+
+Released Nov 23, 2017
+
+### Fixed
+
+- Fix test code schema bug.
+
+### Removed
+
+- Remove duplicate elements on DB.
+
 ## v0.6.0
 
 Released Nov 18, 2017
