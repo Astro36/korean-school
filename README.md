@@ -41,13 +41,14 @@ Fetch the school daily meal:
 
 ```javascript
 const school = require('korean-school');
-school.getMeal(school.find('경기도', '백석고'), new Date(), (meal) => {
+(async () => {
+  const meal = await school.getMeal(school.find('경기도', '백석고'), new Date());
   if (meal !== null) {
     console.log(meal.breakfast);
     console.log(meal.lunch);
     console.log(meal.dinner);
   }
-});
+})();
 ```
 
 ## License
