@@ -31,6 +31,8 @@ const {
   schoolScheduleArraySchema,
   schoolScheduleSchema,
   schoolTeachersSchema,
+  schoolTeacherScheduleSchema,
+  schoolTeacherScheduleArraySchema,
 } = require('./schemas');
 
 describe('school', () => {
@@ -85,5 +87,13 @@ describe('school', () => {
 
   describe('.getTeachers(school)', () => {
     it('should return the school teachers', async () => expect(await school.getTeachers(schoolData)).to.be.jsonSchema(createNullableSchema(schoolTeachersSchema)));
+  });
+
+  describe('.getTeacherSchedule(school, teacher, date)', () => {
+    it('should return the school\'s teacher daily schedule', async () => expect(await school.getTeacherSchedule(schoolData, '김지은', now)).to.be.jsonSchema(createNullableSchema(schoolTeacherScheduleSchema)));
+  });
+
+  describe('.getTeacherSchedules(school, teacher)', () => {
+    it('should return the school\'s teacher weekly schedule', async () => expect(await school.getTeacherSchedules(schoolData, '김지은')).to.be.jsonSchema(createNullableSchema(schoolTeacherScheduleArraySchema)));
   });
 });

@@ -61,6 +61,10 @@ const comciganDataSchema = {
         items: { type: 'number' },
       },
     },
+    가상학급수: {
+      type: 'array',
+      items: { type: 'number' },
+    },
     특별실수: { type: 'number' },
     열람제한일: { type: 'string' },
     저장일: { type: 'string' },
@@ -92,8 +96,12 @@ const comciganDataSchema = {
       type: 'array',
       items: { type: 'array' },
     },
+    교사시간표: {
+      type: 'array',
+      items: { type: 'array' },
+    },
   },
-  required: ['교사수', '성명', '학급수', '요일별시수', '긴과목명', '과목명', '시간표', '전일제', '버젼', '동시수업수', '담임', '특별실수', '열람제한일', '저장일', '학기시작일자', '학교명', '지역명', '학년도', '복수교사', '시작일', '일과시간', '일자자료', '오늘r', '학급시간표'],
+  required: ['교사수', '성명', '학급수', '요일별시수', '긴과목명', '과목명', '시간표', '전일제', '버젼', '동시수업수', '담임', '가상학급수', '특별실수', '열람제한일', '저장일', '학기시작일자', '학교명', '지역명', '학년도', '복수교사', '시작일', '일과시간', '일자자료', '오늘r', '학급시간표', '교사시간표'],
 };
 const schoolDataSchema = {
   type: 'object',
@@ -162,6 +170,24 @@ const schoolTeachersSchema = {
     type: 'string',
   },
 };
+const schoolTeacherScheduleSchema = {
+  type: 'array',
+  items: createNullableSchema({
+    type: 'object',
+    properties: {
+      grade: 'number',
+      room: 'number',
+      subject: nullableStringSchema,
+      subjectOriginal: nullableStringSchema,
+      isChanged: 'boolean',
+    },
+    required: ['grade', 'room', 'subject', 'subjectOriginal', 'isChanged'],
+  }),
+};
+const schoolTeacherScheduleArraySchema = {
+  type: 'array',
+  items: createNullableSchema(schoolTeacherScheduleSchema),
+};
 
 exports.createNullableSchema = createNullableSchema;
 exports.nullableStringSchema = nullableStringSchema;
@@ -174,3 +200,5 @@ exports.schoolMealSchema = schoolMealSchema;
 exports.schoolScheduleArraySchema = schoolScheduleArraySchema;
 exports.schoolScheduleSchema = schoolScheduleSchema;
 exports.schoolTeachersSchema = schoolTeachersSchema;
+exports.schoolTeacherScheduleSchema = schoolTeachersSchema;
+exports.schoolTeacherScheduleArraySchema = schoolTeacherScheduleArraySchema;
