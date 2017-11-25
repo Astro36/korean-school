@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.7.0
+
+Released Nov 25, 2017
+
+### Added
+
+- Add [.getTeacherSchedule(school, teacher, date)](http://astro36.me/KoreanSchool/global.html#getTeacherSchedule) and [.getTeacherSchedules(school, teacher)](http://astro36.me/KoreanSchool/global.html#getTeacherSchedules) method.
+
+### Fixed
+
+- Fix [.getComciganData(school)](http://astro36.me/KoreanSchool/global.html#getComciganData) cache copy bug.
+
 ## v0.6.1
 
 Released Nov 23, 2017

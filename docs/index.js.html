@@ -26,16 +26,33 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const cheerio = require('cheerio');
+            <pre class="prettyprint source linenums"><code>/* KoreanSchool
+Copyright (C) 2017  Astro
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see &lt;http://www.gnu.org/licenses/>. */
+
+const cheerio = require('cheerio');
 const fs = require('fs');
 const jsdom = require('jsdom');
 const path = require('path');
 const request = require('request');
 
 const { JSDOM } = jsdom;
+const getLastLine = buffer => buffer.slice(buffer.lastIndexOf('\n'));
 
-const comcigans = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../data/comcigan.min.json')));
-const schools = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../data/schools.min.json')));
+const comcigans = JSON.parse(getLastLine(fs.readFileSync(path.resolve(__dirname, '../data/comcigan.min.json'))));
+const schools = JSON.parse(getLastLine(fs.readFileSync(path.resolve(__dirname, '../data/schools.min.json'))));
 
 const alias = {
   office: {
@@ -76,6 +93,7 @@ const cache = {
  * @property {string} 버젼
  * @property {number} 동시수업수
  * @property {Array.&lt;Array.&lt;number>>} 담임
+ * @property {Array.&lt;number>} 가상학급수
  * @property {number} 특별실수
  * @property {string} 열람제한일
  * @property {string} 저장일
@@ -89,6 +107,7 @@ const cache = {
  * @property {Array.&lt;Array.&lt;number|string>>} 일자자료
  * @property {number} 오늘r
  * @property {Array.&lt;Array>} 학급시간표
+ * @property {Array.&lt;Array>} 교사시간표
  */
 
 /**
@@ -126,6 +145,15 @@ const cache = {
  * @property {?string} subject
  * @property {?string} subjectOriginal
  * @property {?string} teacher
+ * @property {boolean} isChanged
+ */
+
+/**
+ * @typedef {Object} SchoolTeacherSchedule
+ * @property {number} grade
+ * @property {number} room
+ * @property {?string} subject
+ * @property {?string} subjectOriginal
  * @property {boolean} isChanged
  */
 
@@ -232,21 +260,21 @@ const getComciganData = school => new Promise((resolve) => {
     if (comcigan.name === school.name) {
       const { code } = comcigan;
       if (code in cache.comcigan &amp;&amp; cache.comcigan[code].date > Date.now() - 10000) {
-        resolve(cache.comcigan[code].data);
+        resolve(JSON.parse(cache.comcigan[code].data));
         return;
       }
       request.get({
-        url: `http://112.186.146.96:4080/_hourdat?sc=${code}`,
+        url: `http://112.186.146.96:4080/_hourdat?sc=${code}&amp;nal=1&amp;s=0`,
       }, (err, httpResponse, body) => {
         if (err) {
           resolve(null);
         } else {
-          const data = JSON.parse(body.split('\n')[0]);
+          const data = body.split('\n')[0];
           cache.comcigan[code] = {
             data,
             date: Date.now(),
           };
-          resolve(data);
+          resolve(JSON.parse(data));
         }
       });
       return;
@@ -453,6 +481,71 @@ const getTeachers = school => new Promise(async (resolve) => {
   }
 });
 
+/**
+ * Returns the school's teacher weekly schedule.
+ * @async
+ * @function
+ * @param {SchoolData} school
+ * @param {string} teacher
+ * @returns {?Array.&lt;SchoolTeacherSchedule>}
+ */
+const getTeacherSchedules = (school, teacher) => new Promise(async (resolve) => {
+  const data = await getComciganData(school);
+  if (data) {
+    const teacherIndex = data.성명.indexOf(teacher);
+    if (teacherIndex >= 0) {
+      const weeklySchedule = data.교사시간표[teacherIndex];
+      weeklySchedule[0] = null;
+      for (let day = 1; day &lt; 6; day += 1) {
+        const schedule = weeklySchedule[day];
+        for (let period = 0, len2 = schedule.length; period &lt; len2; period += 1) {
+          const teacherData = schedule[period];
+          if (teacherData > 100) {
+            const tmp = Math.floor(teacherData / 100);
+            const grade = Math.floor(tmp / 100);
+            const room = tmp % 100;
+            const subject = data.시간표[grade][room][day][period] % 100;
+            weeklySchedule[day][period] = {
+              grade,
+              room,
+              subject: data.과목명[teacherData % 100] || null,
+              subjectOriginal: data.긴과목명[teacherData % 100] || null,
+              isChanged: teacherData !== (grade * 10000) + (room * 100) + subject,
+            };
+          } else {
+            weeklySchedule[day][period] = null;
+          }
+        }
+        weeklySchedule[day].splice(0, 1);
+      }
+      weeklySchedule[6] = null;
+      resolve(weeklySchedule);
+    } else {
+      resolve(null);
+    }
+  } else {
+    resolve(null);
+  }
+});
+
+/**
+ * Returns the school's teacher daily schedule.
+ * @async
+ * @function
+ * @param {SchoolData} school
+ * @param {string} teacher
+ * @param {Date} date
+ * @returns {?SchoolSchedule}
+ */
+const getTeacherSchedule = (school, teacher, date) => new Promise(async (resolve) => {
+  const schedules = await getTeacherSchedules(school, teacher);
+  if (schedules) {
+    resolve(schedules[date.getDay()]);
+  } else {
+    resolve(null);
+  }
+});
+
 exports.find = find;
 exports.findAll = findAll;
 exports.getAll = getAll;
@@ -463,6 +556,8 @@ exports.getMeals = getMeals;
 exports.getSchedule = getSchedule;
 exports.getSchedules = getSchedules;
 exports.getTeachers = getTeachers;
+exports.getTeacherSchedule = getTeacherSchedule;
+exports.getTeacherSchedules = getTeacherSchedules;
 </code></pre>
         </article>
     </section>
@@ -473,13 +568,13 @@ exports.getTeachers = getTeachers;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#find">find</a></li><li><a href="global.html#findAll">findAll</a></li><li><a href="global.html#getAll">getAll</a></li><li><a href="global.html#getComciganData">getComciganData</a></li><li><a href="global.html#getInformation">getInformation</a></li><li><a href="global.html#getMeal">getMeal</a></li><li><a href="global.html#getMeals">getMeals</a></li><li><a href="global.html#getSchedule">getSchedule</a></li><li><a href="global.html#getSchedules">getSchedules</a></li><li><a href="global.html#getTeachers">getTeachers</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#find">find</a></li><li><a href="global.html#findAll">findAll</a></li><li><a href="global.html#getAll">getAll</a></li><li><a href="global.html#getComciganData">getComciganData</a></li><li><a href="global.html#getInformation">getInformation</a></li><li><a href="global.html#getMeal">getMeal</a></li><li><a href="global.html#getMeals">getMeals</a></li><li><a href="global.html#getSchedule">getSchedule</a></li><li><a href="global.html#getSchedules">getSchedules</a></li><li><a href="global.html#getTeachers">getTeachers</a></li><li><a href="global.html#getTeacherSchedule">getTeacherSchedule</a></li><li><a href="global.html#getTeacherSchedules">getTeacherSchedules</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Nov 18 2017 21:45:35 GMT+0900 (대한민국 표준시)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Nov 25 2017 18:47:13 GMT+0900 (대한민국 표준시)
 </footer>
 
 <script> prettyPrint(); </script>
