@@ -200,5 +200,5 @@ exports.schoolMealSchema = schoolMealSchema;
 exports.schoolScheduleArraySchema = schoolScheduleArraySchema;
 exports.schoolScheduleSchema = schoolScheduleSchema;
 exports.schoolTeachersSchema = schoolTeachersSchema;
-exports.schoolTeacherScheduleSchema = schoolTeachersSchema;
+exports.schoolTeacherScheduleSchema = schoolTeacherScheduleSchema;
 exports.schoolTeacherScheduleArraySchema = schoolTeacherScheduleArraySchema;

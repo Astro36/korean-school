@@ -1,5 +1,18 @@
 # Changelog
 
+## v0.7.1
+
+Released Dec 15, 2017
+
+### Fixed
+
+- Fix [.getMeal(school, date)](http://astro36.me/KoreanSchool/global.html#getMeal) and [.getMeals(school, date)](http://astro36.me/KoreanSchool/global.html#getMeals) method bug.
+- Fix [.getTeacherSchedule(school, teacher, date)](http://astro36.me/KoreanSchool/global.html#getTeacherSchedule) schema bug.
+
+### Removed
+
+- Remove `cheerio` module from the dependencies.
+
 ## v0.7.0
 
 Released Nov 25, 2017
