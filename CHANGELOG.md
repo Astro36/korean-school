@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.7.2
+
+Released Mar 9, 2018
+
+### Fixed
+
+- Fix Neis crawling bug caused by the changed site API.
+
 ## v0.7.1
 
 Released Dec 15, 2017
