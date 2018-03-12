@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.7.3
+
+Released Mar 12, 2018
+
+### Fixed
+
+- Fix Neis crawling dinner information bug.
+- Fix School Info crawler bug.
+
 ## v0.7.2
 
 Released Mar 9, 2018
