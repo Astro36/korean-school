@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.8.0
+
+Released Apr 3, 2018
+
+### Added
+
+- Now support fetching Korea Digital Media High School meal information.
+
 ## v0.7.3
 
 Released Mar 12, 2018

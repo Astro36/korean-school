@@ -27,7 +27,7 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/* KoreanSchool
-Copyright (C) 2017  Astro
+Copyright (C) 2018  Astro
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -43,9 +43,12 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see &lt;http://www.gnu.org/licenses/>. */
 
 const fs = require('fs');
+const iconv = require('iconv-lite');
 const jsdom = require('jsdom');
 const path = require('path');
 const request = require('request');
+
+const { Dimigo } = require('./utils');
 
 const { JSDOM } = jsdom;
 const getLastLine = buffer => buffer.slice(buffer.lastIndexOf('\n'));
@@ -290,18 +293,18 @@ const getComciganData = school => new Promise((resolve) => {
  * @returns {?SchoolInformation}
  */
 const getInformation = school => new Promise((resolve) => {
-  request.post({
-    url: `http://www.schoolinfo.go.kr/index.jsp?HG_CD=${school.code}`,
+  request.get({
+    url: `http://www.schoolinfo.go.kr/ei/ss/Pneiss_b01_s0.do?HG_CD=${school.code}`,
     encoding: null,
   }, (err, httpResponse, body) => {
     if (err) {
       resolve(null);
     } else {
-      const { document } = (new JSDOM(body)).window;
+      const { document } = (new JSDOM(iconv.decode(body, 'euc-kr'))).window;
       const data = { // default values
         address: null,
-        area: document.querySelector('.School_Division .mapD_Area._10').textContent || null,
-        class: document.querySelector('.School_Division .mapD_Class._04').textContent || null,
+        area: document.querySelector('.School_Division .mapD_Area').textContent || null,
+        class: document.querySelector('.School_Division .mapD_Class').textContent || null,
         office: null,
         phone: null,
         fax: null,
@@ -349,38 +352,43 @@ const getInformation = school => new Promise((resolve) => {
  * @param {Date} date
  * @returns {?Array.&lt;SchoolMeal>}
  */
-const getMeals = (school, date) => new Promise((resolve) => {
-  request.post({
-    url: `http://stu.${school.officeDomain}.kr/sts_sci_md00_001.do`,
-    form: {
-      schulCode: school.code,
-      schulCrseScCode: 4,
-      ay: date.getFullYear(),
-      mm: (`0${date.getMonth() + 1}`).substr(-2),
-    },
-  }, (err, httpResponse, body) => {
-    if (err) {
-      resolve(null);
-    } else {
-      const { document } = (new JSDOM(body)).window;
-      const meals = [];
-      document.querySelectorAll('.tbl_type3 tbody tr td div').forEach((element) => {
-        const content = element.innerHTML.split('&lt;br>').join('\n').split('&amp;amp;').join('&amp;');
-        if (content.trim()) {
-          const breakfast = (content.match(/\[조식\][^[]+(\[?|^)/) || [''])[0].replace(/\[조식\]\s*/, '').replace(/\s*\[/, '');
-          const lunch = (content.match(/\[중식\][^[]+(\[?|^)/) || [''])[0].replace(/\[중식\]\s*/, '').replace(/\s*\[/, '');
-          const dinner = (content.match(/\[석식\][^[]+^/) || [''])[0].replace(/\[석식\]\s*/, '');
-          meals[Number(content.match(/^\d+/)[0]) - 1] = {
-            breakfast: breakfast || null,
-            lunch: lunch || null,
-            dinner: dinner || null,
-          };
-        }
-      });
-      resolve(meals);
-    }
+const getMeals = (school, date) => {
+  if (school.code === 'J100000855') {
+    return Dimigo.getMeals(date);
+  }
+  return new Promise((resolve) => {
+    request.get({
+      url: `http://stu.${school.officeDomain}.kr/sts_sci_md00_001.do`,
+      form: {
+        schulCode: school.code,
+        schulCrseScCode: 4,
+        ay: date.getFullYear(),
+        mm: (`0${date.getMonth() + 1}`).substr(-2),
+      },
+    }, (err, httpResponse, body) => {
+      if (err) {
+        resolve(null);
+      } else {
+        const { document } = (new JSDOM(body)).window;
+        const meals = [];
+        document.querySelectorAll('.tbl_type3 tbody tr td div').forEach((element) => {
+          const content = element.innerHTML.split('&lt;br>').join('\n').split('&amp;amp;').join('&amp;');
+          if (content.trim()) {
+            const breakfast = (content.match(/\[조식\][^[]+/) || [''])[0].replace(/\[조식\]\s*/, '').replace(/\s*\[/, '');
+            const lunch = (content.match(/\[중식\][^[]+/) || [''])[0].replace(/\[중식\]\s*/, '').replace(/\s*\[/, '');
+            const dinner = (content.match(/\[석식\][^[]+/) || [''])[0].replace(/\[석식\]\s*/, '');
+            meals[Number(content.match(/^\d+/)[0]) - 1] = {
+              breakfast: breakfast || null,
+              lunch: lunch || null,
+              dinner: dinner || null,
+            };
+          }
+        });
+        resolve(meals);
+      }
+    });
   });
-});
+};
 
 /**
  * Returns the school daily meal.
@@ -390,14 +398,19 @@ const getMeals = (school, date) => new Promise((resolve) => {
  * @param {Date} date
  * @returns {?SchoolMeal}
  */
-const getMeal = (school, date) => new Promise(async (resolve) => {
-  const meals = await getMeals(school, date);
-  if (meals) {
-    resolve(meals[date.getDate() - 1]);
-  } else {
-    resolve(null);
+const getMeal = (school, date) => {
+  if (school.code === 'J100000855') {
+    return Dimigo.getMeal(date);
   }
-});
+  return new Promise(async (resolve) => {
+    const meals = await getMeals(school, date);
+    if (meals) {
+      resolve(meals[date.getDate() - 1]);
+    } else {
+      resolve(null);
+    }
+  });
+};
 
 /**
  * Returns the school weekly schedule.
@@ -565,7 +578,7 @@ exports.getTeacherSchedules = getTeacherSchedules;
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Dec 15 2017 16:02:08 GMT+0900 (대한민국 표준시)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Apr 03 2018 19:48:28 GMT+0900 (대한민국 표준시)
 </footer>
 
 <script> prettyPrint(); </script>
