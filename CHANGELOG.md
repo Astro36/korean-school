@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.8.1
+
+Released Apr 10, 2018
+
+### Fixed
+
+- Fix a created bug by changing comcigan URL: `./_hourdat` -> `./_hourdata`
+
 ## v0.8.0
 
 Released Apr 3, 2018

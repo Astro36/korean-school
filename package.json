@@ -1,6 +1,6 @@
 {
   "name": "korean-school",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "Fetch Korean Schools Data Online",
   "main": "lib/index.js",
   "scripts": {
@@ -31,7 +31,7 @@
   },
   "homepage": "https://github.com/Astro36/KoreanSchool#readme",
   "dependencies": {
-    "iconv-lite": "^0.4.19",
+    "iconv-lite": "^0.4.21",
     "jsdom": "^11.7.0",
     "request": "^2.85.0"
   },
