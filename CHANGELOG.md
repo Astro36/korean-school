@@ -1,12 +1,24 @@
 # Changelog
 
+## v0.8.2
+
+Released Apr 12, 2018
+
+### Changed
+
+- Expand lifetime of Comcigan data fetching method cache: 10sec -> 5min
+
+### Fixed
+
+- Fix a created bug by changing Comcigan URL.
+
 ## v0.8.1
 
 Released Apr 10, 2018
 
 ### Fixed
 
-- Fix a created bug by changing comcigan URL: `./_hourdat` -> `./_hourdata`
+- Fix a created bug by changing Comcigan URL: `./_hourdat` -> `./_hourdata`
 
 ## v0.8.0
 
