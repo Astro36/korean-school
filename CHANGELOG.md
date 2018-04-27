@@ -2,6 +2,19 @@
 
 ## v0.8.2
 
+Released Apr 27, 2018
+
+### Fixed
+
+- Fix Comcigan crawler bug.
+- Fix School Info crawler bug.
+
+### Removed
+
+- Remove Comcigan school id file.
+
+## v0.8.2
+
 Released Apr 12, 2018
 
 ### Changed

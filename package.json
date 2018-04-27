@@ -1,12 +1,12 @@
 {
   "name": "korean-school",
-  "version": "0.8.2",
+  "version": "0.8.3",
   "description": "Fetch Korean Schools Data Online",
   "main": "lib/index.js",
   "scripts": {
     "lint": "eslint lib test",
     "lint-fix": "eslint lib test --fix",
-    "test": "mocha --reporter nyan"
+    "test": "mocha --reporter nyan --timeout 15000"
   },
   "repository": {
     "type": "git",
@@ -32,7 +32,8 @@
   "homepage": "https://github.com/Astro36/KoreanSchool#readme",
   "dependencies": {
     "iconv-lite": "^0.4.21",
-    "jsdom": "^11.7.0",
+    "jsdom": "^11.9.0",
+    "puppeteer": "^1.3.0",
     "request": "^2.85.0"
   },
   "devDependencies": {
@@ -41,6 +42,6 @@
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.11.0",
-    "mocha": "^5.0.5"
+    "mocha": "^5.1.1"
   }
 }
