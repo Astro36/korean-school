@@ -1,5 +1,21 @@
 # Changelog
 
+## v0.8.5
+
+Released Aug 12, 2018
+
+### Fixed
+
+- Fix `school.getComciganData` and `school.getInformation` method requesting URL.
+
+## v0.8.4
+
+Released Apr 27, 2018
+
+### Fixed
+
+- Fix cache object bug.
+
 ## v0.8.3
 
 Released Apr 27, 2018
