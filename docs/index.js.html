@@ -27,7 +27,7 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/* KoreanSchool
-Copyright (C) 2018  Astro
+Copyright (C) 2018  Seungjae Park
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -46,6 +46,7 @@ const fs = require('fs');
 const iconv = require('iconv-lite');
 const jsdom = require('jsdom');
 const path = require('path');
+const puppeteer = require('puppeteer');
 const request = require('request');
 
 const { Dimigo } = require('./utils');
@@ -53,7 +54,6 @@ const { Dimigo } = require('./utils');
 const { JSDOM } = jsdom;
 const getLastLine = buffer => buffer.slice(buffer.lastIndexOf('\n'));
 
-const comcigans = JSON.parse(getLastLine(fs.readFileSync(path.resolve(__dirname, '../data/comcigan.min.json'))));
 const schools = JSON.parse(getLastLine(fs.readFileSync(path.resolve(__dirname, '../data/schools.min.json'))));
 
 const alias = {
@@ -161,6 +161,22 @@ const cache = {
 
 /**
  * Returns all matched school data from DB with school's office and name.
+ * @example
+ * school.findAll('경기도', '백석고');
+ * // [
+ * //   {
+ * //     code: 'J100000564',
+ * //     office: '경기도',
+ * //     officeDomain: 'goe.go',
+ * //     name: '백석고등학교'
+ * //   },
+ * //   {
+ * //     code: 'J100005280',
+ * //     office: '경기도',
+ * //     officeDomain: 'goe.go',
+ * //     name: '양주백석고등학교'
+ * //   }
+ * // ]
  * @function
  * @param {string} office
  * @param {string} schoolName
@@ -212,7 +228,15 @@ const findAll = (office, schoolName, useAlias = true) => {
 };
 
 /**
- * Returns the school data which is best match in the DB with school's office and name.
+ * Returns the best matched school data in the DB with school's office and name.
+ * @example
+ * school.find('경기도', '백석고');
+ * // {
+ * //   code: 'J100000564',
+ * //   office: '경기도',
+ * //   officeDomain: 'goe.go',
+ * //   name: '백석고등학교'
+ * // }
  * @function
  * @param {string} office
  * @param {string} schoolName
@@ -244,6 +268,16 @@ const find = (office, schoolName, useAlias = true) => {
 
 /**
  * Returns all school data from DB.
+ * @example
+ * school.getAll();
+ * // [
+ * //   ...
+ * //   { code: 'J100000564',
+ * //   office: '경기도',
+ * //   officeDomain: 'goe.go',
+ * //   name: '백석고등학교' }
+ * //   ...
+ * // ]
  * @function
  * @returns {Array.&lt;SchoolData>}
  */
@@ -251,51 +285,80 @@ const getAll = () => schools;
 
 /**
  * Returns the school data from Comcigan server.
+ * @example
+ * await school.getComciganData(find('경기도', '백석고'));
+ * // ComciganData {}
  * @async
  * @function
  * @param {SchoolData} school
  * @returns {?ComciganData}
  */
-const getComciganData = school => new Promise((resolve) => {
-  for (let i = 0, len = comcigans.length; i &lt; len; i += 1) {
-    const comcigan = comcigans[i];
-    if (comcigan.name === school.name) {
-      const { code } = comcigan;
-      if (code in cache.comcigan &amp;&amp; cache.comcigan[code].date > Date.now() - 10000) {
-        resolve(JSON.parse(cache.comcigan[code].data));
-        return;
+const getComciganData = school => new Promise(async (resolve) => {
+  const UPDATE_TIME = 5 * 60 * 1000; // 5 minutes
+  const { code } = school;
+  const { comcigan } = cache;
+  if (code in comcigan &amp;&amp; comcigan[code].date > Date.now() - UPDATE_TIME) {
+    resolve(JSON.parse(comcigan[code].data));
+  } else {
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    page.on('response', async (response) => {
+      const content = await response.text();
+      if (content.includes('{"학교검색":')) {
+        page.click('tr.검색 > td > a').catch(() => { }); // puppeteer bug: https://github.com/GoogleChrome/puppeteer/issues/1769
       }
-      request.get({
-        url: `http://112.186.146.96:4080/_hourdata?sc=${code}&amp;nal=1&amp;s=0`,
-      }, (err, httpResponse, body) => {
-        if (err) {
-          resolve(null);
-        } else {
-          const data = body.split('\n')[0];
-          cache.comcigan[code] = {
-            data,
-            date: Date.now(),
-          };
-          resolve(JSON.parse(data));
-        }
-      });
-      return;
-    }
+      if (content.includes('{"교사수":')) {
+        const html = await page.content();
+        await browser.close();
+        let data = content.split('\n')[0]
+          .replace(/(자료\d+)"/g, ($, $1) => {
+            const matches = html.match(new RegExp(`([\\w가-힣]+)\\s*=\\s*자료\\.${$1}`));
+            return matches ? `${matches[1]}"` : $;
+          })
+          .replace(/"자료\d+":("\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}")/, '"저장일":$1')
+          .replace('"원자료"', '"시간표"')
+          .replace('"일일자료"', '"학급시간표"');
+        data = data.replace(/자료\d+"/g, $ => (data.split($).length === 2 ? '교사시간표"' : '과목명"'));
+        comcigan[code] = {
+          data,
+          date: Date.now(),
+        };
+        resolve(JSON.parse(data));
+      }
+    });
+    await page.goto('http://comci.kr:4081/st');
+    await page.type('#sc', school.name);
+    await page.click('input[value=\'검색\']');
   }
-  resolve(null);
 });
 
 /**
  * Returns the school information from School Info.
+ * @example
+ * await school.getInformation(find('경기도', '백석고'));
+ * // {
+ * //   address: '경기도 고양시 일산동구 강촌로 115',
+ * //   area: '경기',
+ * //   class: '고',
+ * //   office: '경기도교육청',
+ * //   phone: '031-901-0506',
+ * //   fax: '031-901-0501',
+ * //   establishmentDate: '1992-09-08',
+ * //   establishmentType: '공립',
+ * //   schoolAnniversary: '1992-09-08',
+ * //   schoolType: '단설',
+ * //   site: 'http://www.baekseok.hs.kr'
+ * // }
  * @async
  * @function
  * @param {SchoolData} school
  * @returns {?SchoolInformation}
  */
 const getInformation = school => new Promise((resolve) => {
-  request.get({
-    url: `http://www.schoolinfo.go.kr/ei/ss/Pneiss_b01_s0.do?HG_CD=${school.code}`,
+  request.post({
+    url: `https://www.schoolinfo.go.kr/ei/ss/Pneiss_b01_s0.do?HG_CD=${school.code}`,
     encoding: null,
+    headers: { 'User-Agent': 'Mozilla/5.0' },
   }, (err, httpResponse, body) => {
     if (err) {
       resolve(null);
@@ -346,6 +409,16 @@ const getInformation = school => new Promise((resolve) => {
 
 /**
  * Returns the school monthly meals.
+ * @example
+ * await school.getMeals(find('경기도', '백석고'), new Date());
+ * // [
+ * //   {
+ * //     breakfast: null,
+ * //     lunch: '보리밥_H\n어묵매운탕_H1.5.6.8.9.13.\n콘치즈떡갈비_H1.2.5.6.10.13.15.16.',
+ * //     dinner: null
+ * //   }
+ * //   ...
+ * // ]
  * @async
  * @function
  * @param {SchoolData} school
@@ -392,6 +465,13 @@ const getMeals = (school, date) => {
 
 /**
  * Returns the school daily meal.
+ * @example
+ * await school.getMeal(find('경기도', '백석고'), new Date());
+ * // {
+ * //   breakfast: null,
+ * //   lunch: '보리밥_H\n어묵매운탕_H1.5.6.8.9.13.\n콘치즈떡갈비_H1.2.5.6.10.13.15.16.',
+ * //   dinner: null
+ * // }
  * @async
  * @function
  * @param {SchoolData} school
@@ -578,7 +658,7 @@ exports.getTeacherSchedules = getTeacherSchedules;
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Apr 10 2018 00:47:14 GMT+0900 (대한민국 표준시)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Nov 17 2018 00:41:04 GMT+0900 (Korean Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

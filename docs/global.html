@@ -112,7 +112,7 @@
 
 
 <div class="description">
-    Returns the school data which is best match in the DB with school's office and name.
+    Returns the best matched school data in the DB with school's office and name.
 </div>
 
 
@@ -295,7 +295,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line194">line 194</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line218">line 218</a>
     </li></ul></dd>
     
 
@@ -338,6 +338,17 @@
     
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>school.find('경기도', '백석고');
+// {
+//   code: 'J100000564',
+//   office: '경기도',
+//   officeDomain: 'goe.go',
+//   name: '백석고등학교'
+// }</code></pre>
 
 
 
@@ -538,7 +549,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line142">line 142</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line158">line 158</a>
     </li></ul></dd>
     
 
@@ -581,6 +592,25 @@
     
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>school.findAll('경기도', '백석고');
+// [
+//   {
+//     code: 'J100000564',
+//     office: '경기도',
+//     officeDomain: 'goe.go',
+//     name: '백석고등학교'
+//   },
+//   {
+//     code: 'J100005280',
+//     office: '경기도',
+//     officeDomain: 'goe.go',
+//     name: '양주백석고등학교'
+//   }
+// ]</code></pre>
 
 
 
@@ -642,7 +672,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line222">line 222</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line256">line 256</a>
     </li></ul></dd>
     
 
@@ -685,6 +715,19 @@
     
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>school.getAll();
+// [
+//   ...
+//   { code: 'J100000564',
+//   office: '경기도',
+//   officeDomain: 'goe.go',
+//   name: '백석고등학교' }
+//   ...
+// ]</code></pre>
 
 
 
@@ -795,7 +838,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line231">line 231</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line268">line 268</a>
     </li></ul></dd>
     
 
@@ -838,6 +881,12 @@
     
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>await school.getComciganData(find('경기도', '백석고'));
+// ComciganData {}</code></pre>
 
 
 
@@ -948,7 +997,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line267">line 267</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line329">line 329</a>
     </li></ul></dd>
     
 
@@ -991,6 +1040,24 @@
     
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>await school.getInformation(find('경기도', '백석고'));
+// {
+//   address: '경기도 고양시 일산동구 강촌로 115',
+//   area: '경기',
+//   class: '고',
+//   office: '경기도교육청',
+//   phone: '031-901-0506',
+//   fax: '031-901-0501',
+//   establishmentDate: '1992-09-08',
+//   establishmentType: '공립',
+//   schoolAnniversary: '1992-09-08',
+//   schoolType: '단설',
+//   site: 'http://www.baekseok.hs.kr'
+// }</code></pre>
 
 
 
@@ -1124,7 +1191,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line373">line 373</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line453">line 453</a>
     </li></ul></dd>
     
 
@@ -1167,6 +1234,16 @@
     
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>await school.getMeal(find('경기도', '백석고'), new Date());
+// {
+//   breakfast: null,
+//   lunch: '보리밥_H\n어묵매운탕_H1.5.6.8.9.13.\n콘치즈떡갈비_H1.2.5.6.10.13.15.16.',
+//   dinner: null
+// }</code></pre>
 
 
 
@@ -1300,7 +1377,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line327">line 327</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line400">line 400</a>
     </li></ul></dd>
     
 
@@ -1343,6 +1420,19 @@
     
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>await school.getMeals(find('경기도', '백석고'), new Date());
+// [
+//   {
+//     breakfast: null,
+//     lunch: '보리밥_H\n어묵매운탕_H1.5.6.8.9.13.\n콘치즈떡갈비_H1.2.5.6.10.13.15.16.',
+//     dinner: null
+//   }
+//   ...
+// ]</code></pre>
 
 
 
@@ -1522,7 +1612,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line435">line 435</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line515">line 515</a>
     </li></ul></dd>
     
 
@@ -1721,7 +1811,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line396">line 396</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line476">line 476</a>
     </li></ul></dd>
     
 
@@ -1874,7 +1964,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line451">line 451</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line531">line 531</a>
     </li></ul></dd>
     
 
@@ -2073,7 +2163,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line516">line 516</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line596">line 596</a>
     </li></ul></dd>
     
 
@@ -2249,7 +2339,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line468">line 468</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line548">line 548</a>
     </li></ul></dd>
     
 
@@ -4306,7 +4396,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Apr 10 2018 00:47:14 GMT+0900 (대한민국 표준시)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Nov 17 2018 00:41:04 GMT+0900 (Korean Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
