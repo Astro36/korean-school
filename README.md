@@ -33,7 +33,7 @@ git clone https://github.com/Astro36/KoreanSchool.git
 
 ### API Documentation
 
-See [API](http://astro36.me/KoreanSchool/index.html)
+See [API](https://astro36.github.io/KoreanSchool/index.html)
 
 ### Example
 
