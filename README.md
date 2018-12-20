@@ -1,4 +1,4 @@
-# KoreanSchool
+# Korean School
 
 > Fetch Korean Schools Data Online
 
@@ -26,14 +26,14 @@ npm install korean-school --save
 - Clone the repo:
 
 ```bash
-git clone https://github.com/Astro36/KoreanSchool.git
+git clone https://github.com/Astro36/korean-school.git
 ```
 
 ## Usage
 
 ### API Documentation
 
-See [API](https://astro36.github.io/KoreanSchool/index.html)
+See [API](https://astro36.github.io/korean-school/index.html)
 
 ### Example
 
@@ -71,4 +71,4 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ```
 
-KoreanSchool is licensed under the [GPL 3.0](./LICENSE).
+korean-school is licensed under the [GPL 3.0](./LICENSE).
