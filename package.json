@@ -36,12 +36,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Astro36/KoreanSchool.git"
+    "url": "git+https://github.com/Astro36/korean-school.git"
   },
-  "author": "Seungjae Park <astr36@naver.com>",
+  "author": "Seungjae Park <astro.psj@gmail.com>",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/Astro36/KoreanSchool/issues"
+    "url": "https://github.com/Astro36/korean-school/issues"
   },
-  "homepage": "https://github.com/Astro36/KoreanSchool#readme"
+  "homepage": "https://github.com/Astro36/korean-school#readme"
 }
