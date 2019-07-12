@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.8.6
+
+Released Jul 12, 2019
+
+### Fixed
+
+- Fix potential security vulnerabilities.
+
 ## v0.8.5
 
 Released Aug 12, 2018
