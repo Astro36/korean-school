@@ -55,7 +55,7 @@ const school = require('korean-school');
 
 ```text
 KoreanSchool
-Copyright (C) 2018  Seungjae Park
+Copyright (C) 2019  Seungjae Park
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

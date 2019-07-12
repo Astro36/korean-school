@@ -1,6 +1,6 @@
 {
   "name": "korean-school",
-  "version": "0.8.5",
+  "version": "0.8.6",
   "description": "Fetch Korean Schools Data Online",
   "main": "lib/index.js",
   "keywords": [
@@ -16,18 +16,18 @@
     "test": "test"
   },
   "dependencies": {
-    "iconv-lite": "^0.4.24",
-    "jsdom": "^13.0.0",
-    "puppeteer": "^1.10.0",
+    "iconv-lite": "^0.5.0",
+    "jsdom": "^15.1.1",
+    "puppeteer": "^1.18.1",
     "request": "^2.88.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "chai-json-schema": "^1.5.0",
-    "eslint": "^5.9.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0",
-    "mocha": "^5.2.0"
+    "chai-json-schema": "^1.5.1",
+    "eslint": "^6.0.1",
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-plugin-import": "^2.18.0",
+    "mocha": "^6.1.4"
   },
   "scripts": {
     "lint": "eslint lib test",
