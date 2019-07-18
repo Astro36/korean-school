@@ -4,9 +4,9 @@
 
 Released Jul 12, 2019
 
-### Fixed
+## Security
 
-- Fix potential security vulnerabilities.
+- Fix security vulnerability found dependency.
 
 ## v0.8.5
 
