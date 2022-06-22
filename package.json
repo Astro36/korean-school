@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "iconv-lite": "^0.5.0",
-    "jsdom": "^15.1.1",
+    "jsdom": "^16.5.0",
     "puppeteer": "^1.18.1",
     "request": "^2.88.0"
   },
